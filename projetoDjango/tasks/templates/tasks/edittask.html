@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Edite uma tarefa{% endblock %}
+{% block title %}Editando '{{task.title}}''{% endblock %}
 
 {% block content %}
     <div class="offset-1 col-10 list-div">
@@ -8,7 +8,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" class="btn btn-success" value="Criar tarefa">
+            <input type="submit" class="btn btn-success" value="Concluir edição">
         </form>
     </div>
 {% endblock %}
