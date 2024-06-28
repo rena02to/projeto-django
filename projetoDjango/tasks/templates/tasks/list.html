@@ -9,11 +9,20 @@
             <div class="col-2 add-div">
                 <i class="fas fa-plus"></i> Adicionar tarefa
             </div>
-            <div class="col-9 search-div">
-                <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar...">
-                <i class="fas fa-search"></i>
-            </div>
         </a>
+        <div class="col-9 search-div">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome da tarefa para buscar...">
+            <i class="fas fa-search"></i>
+        </div>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{message.tags}}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <ul class="task-list">
             {% for task in tasks %}
                 <li class="task-item">
