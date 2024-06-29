@@ -3,10 +3,19 @@ from django.http import HttpResponse
 from .forms import TaskForm
 from .models import Task
 from django.contrib import messages
+from django.core.paginator import Paginator
+
 
 def taskList(request):
-    task = Task.objects.all().order_by('-created_at')
-    return render(request, 'tasks/list.html', {'tasks': task})
+    tasks_list = Task.objects.all().order_by('-created_at')
+
+    paginator = Paginator(tasks_list, 3)
+
+    page = request.GET.get('page')
+
+    tasks = paginator.get_page(page)
+
+    return render(request, 'tasks/list.html', {'tasks': tasks})
 
 def taskView(request, id):
     task = get_object_or_404(Task, pk=id)
