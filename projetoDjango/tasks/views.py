@@ -9,7 +9,6 @@ from django.contrib.auth import get_user_model
 
 @login_required
 def taskList(request):
-
     search = request.GET.get('search')
 
     if search:
@@ -62,6 +61,20 @@ def editTask(request, id):
                 return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
         else:
             return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
+
+@login_required
+def changeStatus(request, id):
+    task = get_object_or_404(Task, pk=id)
+    if task.user != request.user:
+        messages.info(request, 'Você não tem permissão para editar essa tarefa!')
+        return redirect('/')
+    else:
+        if(task.done == 'doing'):
+            task.done = 'done'
+        else:
+            task.done = 'doing'
+        task.save()
+        return redirect('/')
 
 @login_required
 def deleteTask(request, id):
