@@ -16,6 +16,14 @@
                 <i class="fas fa-search" id="search-btn"></i>
             </form>
         </div>
+        <div class="col-12 filter-div">
+            <span>Filtrar por:</span>
+            <select value='done' name="filter" id="filter" class="form-control">
+                <option value="" {% if filter == "" %}selected{% endif %}>Padrão</option>
+                <option value="done" {% if filter == "done" %}selected{% endif %}>Tarefas concluídas</option>
+                <option value="doing" {% if filter == "doing" %}selected{% endif %}>Tarefas pendentes</option>
+            </select>
+        </div>
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
